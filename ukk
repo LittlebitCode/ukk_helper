@@ -1,0 +1,95 @@
+import java.util.Scanner;
+
+public class aditukk {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int menu;
+
+        do {
+            System.out.println("===== APLIKASI PEMINJAMAN BUKU =====");
+            System.out.println("Selamat datang, pilih menu di bawah ini:");
+            System.out.println("1. Pinjam buku");
+            System.out.println("2. Kembalikan buku");
+            System.out.println("3. Keluar");
+            System.out.print("Menu yang dipilih: ");
+            menu = input.nextInt();
+
+            switch (menu) {
+                case 1:
+                    pinjamBuku(input);
+                    break;
+                case 2:
+                    kembalikanBuku(input);
+                    break;
+                case 3:
+                    System.out.println("Terima kasih telah menggunakan program ini.");
+                    break;
+                default:
+                    System.out.println("Menu yang Anda pilih tidak valid.");
+            }
+
+            System.out.println();
+        } while (menu != 3);
+
+        input.close();
+    }
+
+    public static void pinjamBuku(Scanner input) {
+        input.nextLine();
+        System.out.print("Nama peminjam: ");
+        String namaPeminjam = input.nextLine();
+        System.out.print("Judul buku: ");
+        String judulBuku = input.nextLine();
+        System.out.print("Jumlah buku: ");
+        int jumlahBuku = input.nextInt();
+
+        System.out.println();
+        System.out.println("=====KETERANGAN PEMINJAMAN=====");;
+        System.out.println("Peminjam: " + namaPeminjam);
+        System.out.println("Judul buku: " + judulBuku);
+        System.out.println("Jumlah buku: " + jumlahBuku);
+    }
+
+    public static void kembalikanBuku(Scanner input) {
+        input.nextLine();
+        System.out.print("Nama peminjam: ");
+        String namaPeminjam = input.nextLine();
+        System.out.print("Judul buku: ");
+        String judulBuku = input.nextLine();
+        System.out.print("Jumlah buku: ");
+        int jumlahBuku = input.nextInt();
+        System.out.print("Lama pinjam: ");
+        int lamaPinjam = input.nextInt();
+
+        int batasWaktu = 7;
+        int dendaPerBuku = 5000; 
+        int jumlahHariKeterlambatan = lamaPinjam - batasWaktu;
+        int totalDenda = 0;
+
+        System.out.println();
+        System.out.println("===== KETERANGAN PEMINJAMAN =====");
+        System.out.println("Peminjam: " + namaPeminjam);
+        System.out.println("Judul buku: " +judulBuku);
+        System.out.println("Jumlah buku: " + jumlahBuku);
+        System.out.println("Lama pinjam: " + lamaPinjam + " hari");
+        System.out.println("");
+
+        if (jumlahHariKeterlambatan > 0) {
+            System.out.println("anda terlambat mengembalikan buku selama " + jumlahHariKeterlambatan +" hari. Anda wajib membayar denda!");
+            System.out.println("");
+            System.out.println("Catatan:");
+            System.out.println("- Denda akan diberikan apabila peminjam mengembalikan buku lebih dari 7 hari.");
+            System.out.println("- Denda akan dikenakan sebesar Rp. 5000/buku untuk setiap 1 hari keterlambatan.");
+            System.out.println("");
+            System.out.println("Rincian denda:");
+            System.out.println("Jumlah buku = "+ jumlahBuku +" buku");
+            System.out.println("Nominal denda = Rp." + dendaPerBuku);
+            System.out.println("Lama keterlambatan = " + jumlahHariKeterlambatan + " hari");
+            System.out.println("");
+            totalDenda = (jumlahBuku * dendaPerBuku) * jumlahHariKeterlambatan;
+            System.out.println("TOTAL DENDA = Rp. "+totalDenda);  
+        } else {
+            System.out.println("Barang dikembalikan tepat waktu.");
+        }
+    }
+}
